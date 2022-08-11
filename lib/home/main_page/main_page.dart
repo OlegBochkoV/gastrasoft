@@ -19,7 +19,7 @@ class MainPage extends StatelessWidget {
       children: [
         header(),
         news(newsItem),
-        // group(),
+        group(),
         // calendar()
       ],
     );
@@ -105,7 +105,7 @@ class MainPage extends StatelessWidget {
   Widget itemNews(NewsData newsItem) {
     return Row(
       children: [
-        SizedBox(width: 5.w),
+        SizedBox(width: 7.5.w),
         Container(
           width: 70.w,
           height: 18.h,
@@ -122,6 +122,48 @@ class MainPage extends StatelessWidget {
             ],
           ),
         )
+      ],
+    );
+  }
+
+  Widget group() {
+    TextStyle style1 = TextStyle(fontWeight: FontWeight.w700, fontSize: 21.sp);
+    TextStyle style2 = TextStyle(fontWeight: FontWeight.w500, fontSize: 12.sp);
+    TextStyle style3 = TextStyle(fontWeight: FontWeight.w700, fontSize: 11.sp, color: AppColors.lighGreen);
+    TextStyle style4 = TextStyle(fontWeight: FontWeight.w700, fontSize: 14.sp);
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(height: 2.h),
+        Text('Группа', style: style1),
+        SizedBox(height: 2.h),
+        Container(
+          height: 13.h,
+          width: 85.w,
+          decoration: BoxDecoration(
+            color: AppColors.white,
+            borderRadius: BorderRadius.circular(5.w),
+          ),
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 5.w),
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    SvgPicture.asset('assets/icons/group.svg', height: 4.w, width: 4.w),
+                    SizedBox(width: 2.w),
+                    Text('Начальная группа', style: style2),
+                    SizedBox(width: 4.w),
+                    Text('560', style: style3)
+                  ],
+                ),
+                SizedBox(height: 2.h),
+                Text('Перейти в чат', style: style4)
+              ],
+            ),
+          ),
+        ),
       ],
     );
   }

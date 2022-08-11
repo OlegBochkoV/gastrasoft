@@ -15,8 +15,7 @@ class MyApp extends StatelessWidget {
           initialRoute: route,
           onGenerateRoute: AppRouter.onGenerateRoute,
           debugShowCheckedModeBanner: false,
-          title: 'gastrasoft',
-          home: Container(),
+          title: 'gastrasoft'
         );
       }
     );
