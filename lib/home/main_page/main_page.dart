@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gastra_soft/config/app_theme.dart';
 import 'package:gastra_soft/domen/news_item.dart';
+import 'package:gastra_soft/home/main_page/show_dialog.dart';
 import 'package:sizer/sizer.dart';
 
 class MainPage extends StatelessWidget {
@@ -18,9 +19,10 @@ class MainPage extends StatelessWidget {
     return Column(
       children: [
         header(),
-        news(newsItem),
+        news(newsItem, context),
         group(),
-        // calendar()
+        const SizedBox(height: 20),
+        calendar()
       ],
     );
   }
@@ -30,7 +32,7 @@ class MainPage extends StatelessWidget {
     TextStyle style2 = TextStyle(fontWeight: FontWeight.w900, fontSize: 9.sp, color: AppColors.white);
 
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 8.w),
+      padding: EdgeInsets.only(top: 7.h, bottom: 2.h, left: 8.w, right: 8.w),
       child: Row(
         children: [
           Stack(
@@ -94,32 +96,35 @@ class MainPage extends StatelessWidget {
     );
   }
 
-  Widget news(List<NewsData> newsItem) {
+  Widget news(List<NewsData> newsItem, BuildContext context) {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       physics: const BouncingScrollPhysics(),
-      child: Row(children: newsItem.map((e) => itemNews(e)).toList())
+      child: Row(children: newsItem.map((e) => itemNews(e, context)).toList())
     );
   }
 
-  Widget itemNews(NewsData newsItem) {
+  Widget itemNews(NewsData newsItem, BuildContext context) {
     return Row(
       children: [
         SizedBox(width: 7.5.w),
-        Container(
-          width: 70.w,
-          height: 18.h,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(5.w),
-            color: AppColors.white
-          ),
-          child: Column(
-            children: [
-              SizedBox(height: 4.h),
-              Text(newsItem.title),
-              SizedBox(height: 2.h),
-              Text(newsItem.description)
-            ],
+        GestureDetector(
+          onTap: () => dialogAddAccount(newsItem, context),
+          child: Container(
+            width: 60.w,
+            height: 15.h,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5.w),
+              color: AppColors.white
+            ),
+            child: Column(
+              children: [
+                SizedBox(height: 4.h),
+                Text(newsItem.title),
+                SizedBox(height: 2.h),
+                Text(newsItem.description)
+              ],
+            ),
           ),
         )
       ],
@@ -165,6 +170,35 @@ class MainPage extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+
+  Widget calendar() {
+    TextStyle style = TextStyle(fontWeight: FontWeight.w700, fontSize: 19.sp, color: Colors.black);
+
+    return Expanded(
+      child: Container(
+        width: 100.w,
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.only(topLeft: Radius.circular(30), topRight: Radius.circular(30)),
+          color: Colors.white),
+        child: Padding(
+          padding: const EdgeInsets.only(left: 20, right: 20, top: 25),
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  Text('Календарь', style: style),
+                  const Spacer(),
+                  const Icon(Icons.chevron_left, size: 30),
+                  const SizedBox(width: 10),
+                  const Icon(Icons.chevron_right, size: 30)
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
