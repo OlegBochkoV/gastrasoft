@@ -107,7 +107,7 @@ class MainPage extends StatelessWidget {
   Widget itemNews(NewsData newsItem, BuildContext context) {
     return Row(
       children: [
-        SizedBox(width: 7.5.w),
+        SizedBox(width: 4.w),
         GestureDetector(
           onTap: () => dialogAddAccount(newsItem, context),
           child: Container(
@@ -126,7 +126,8 @@ class MainPage extends StatelessWidget {
               ],
             ),
           ),
-        )
+        ),
+        SizedBox(width: 4.w),
       ],
     );
   }
